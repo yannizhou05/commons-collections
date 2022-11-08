@@ -32,6 +32,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.LinkedHashMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -687,7 +688,9 @@ public class CollectionUtilsTest extends MockTestCase {
         assertEquals(2, CollectionUtils.get((Object) collectionA, 2));
         assertEquals(2, CollectionUtils.get((Object) collectionA.iterator(), 2));
         final Map<Integer, Integer> map = CollectionUtils.getCardinalityMap(collectionA);
-        assertEquals(map.entrySet().iterator().next(), CollectionUtils.get((Object) map, 0));
+        Map<Integer, Integer> linkedMap = new LinkedHashMap<>();
+        linkedMap.putAll(map);
+        assertEquals(linkedMap.entrySet().iterator().next(), CollectionUtils.get((Object) linkedMap, 0));
     }
 
     @Test
@@ -2298,5 +2301,5 @@ public class CollectionUtilsTest extends MockTestCase {
         assertEquals(Integer.valueOf(4), freq2.get(4));
         assertEquals(Integer.valueOf(1), freq2.get(5));
     }
-
+    
 }
